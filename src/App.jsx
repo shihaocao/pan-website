@@ -18,8 +18,8 @@ function App() {
   }, []);
 
   return (
-    <div style={{ width: '100px', height: '50vh', overflow: 'hidden' }}>
-      <canvas id="myThreeJsCanvas" style={{ width: '100px', height: '10%' }} />
+    <div>
+      <canvas id="myThreeJsCanvas"/>
     </div>
   );
 }
