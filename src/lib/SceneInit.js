@@ -33,10 +33,15 @@ export default class SceneInit {
       1,
       1000
     );
-    this.camera.position.z = 48;
+    this.camera.position.z = 60;
 
     // NOTE: Specify a canvas which is already created in the HTML.
     const canvas = document.getElementById(this.canvasId);
+
+    canvas.style.position = 'absolute';
+    canvas.style.left = '50%';
+    canvas.style.transform = 'translateX(-50%)';
+
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       // NOTE: Anti-aliasing smooths out the edges.
@@ -56,8 +61,8 @@ export default class SceneInit {
     this.clock = new THREE.Clock();
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableZoom = false;
-    this.stats = Stats();
-    document.body.appendChild(this.stats.dom);
+    // this.stats = Stats();
+    // document.body.appendChild(this.stats.dom);
 
     // ambient light which is for the whole scene
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -87,6 +92,8 @@ export default class SceneInit {
 
   resizeCanvasToDisplaySize() {
     const canvas = renderer.domElement;
+
+    
     // look up the size the canvas is being displayed
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
@@ -108,9 +115,10 @@ export default class SceneInit {
     window.requestAnimationFrame(this.animate.bind(this));
 
     // this.resizeCanvasToDisplaySize()
-
+    // console.log("hello")
+    this.onWindowResize()
     this.render();
-    this.stats.update();
+    // this.stats.update();
     this.controls.update();
   }
 
@@ -121,8 +129,16 @@ export default class SceneInit {
   }
 
   onWindowResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
+    // console.log("width: %d, %d", window.innerWidth, window.innerHeight)
+
+    // in retrospec this is highly unnesessary since the background is black too
+    // only useful if we wanted the orbit render in a window/container
+    const scale_down = 1.6
+    const v_scale_down = 1.2
+
+    this.camera.aspect = window.innerWidth / scale_down / (window.innerHeight / v_scale_down);
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(window.innerWidth / scale_down, (window.innerHeight/ v_scale_down));
   }
 }
+
