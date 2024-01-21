@@ -23,6 +23,8 @@ export default class SceneInit {
     // NOTE: Lighting is basically required.
     this.ambientLight = undefined;
     this.directionalLight = undefined;
+
+    this.earthMesh = undefined; // Earth mesh
   }
 
   initialize() {

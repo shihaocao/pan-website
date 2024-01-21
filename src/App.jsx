@@ -10,11 +10,22 @@ function App() {
     test.initialize();
     test.animate();
 
-    const boxGeometry = new THREE.BoxGeometry(16, 16, 16);
-    const boxMaterial = new THREE.MeshNormalMaterial();
-    const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
+    // const boxGeometry = new THREE.BoxGeometry(16, 16, 16);
+    // const boxMaterial = new THREE.MeshNormalMaterial();
+    // const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
 
-    test.scene.add(boxMesh);
+    // test.scene.add(boxMesh);
+
+    // Use default Earth texture
+    const earthTexture = new THREE.TextureLoader().load('textures/daynight_earth.jpg'); // Default texture
+
+    // Create Earth sphere
+    const earthGeometry = new THREE.SphereGeometry(16,32,32); // Adjust radius as needed
+    const earthMaterial = new THREE.MeshPhongMaterial({ map: earthTexture });
+
+    const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+    test.scene.add(earthMesh);
+
   }, []);
 
   return (
